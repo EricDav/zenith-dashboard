@@ -10,6 +10,12 @@
         $dateCreated = $_POST['date_created'];
         if (!$dateCreated) $errorMessage = 'Date is required';
 
+        $location = $_POST['location'];
+
+        if (!$location) $errorMessage = 'Location is required';
+        $status = $_POST['status'];
+        if (!$status) $errorMessage = 'Status is required';
+
         if ($errorMessage) {
             $shippingInfo = $_POST;
         } else {
@@ -17,6 +23,8 @@
                 'description' => $description,
                 'date_created' => $dateCreated,
                 'tracking_number' => $trackingNumber,
+                'location' => $location,
+                'status' => $status
             );
             $result = createHistory($data);
             if ($result) {
@@ -100,12 +108,26 @@
                             </div>
                 </div>
                 <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputEmail4" class="input__label">Status</label>
+                        <select style="width: 100%; height: 60%;" name="status">
+                            <option value="1">In Transit</option>
+                            <option value="2">Cancelled</option>
+                            <option value="3">Arrived</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                                <label for="inputPassword4" class="input__label">Location</label>
+                                <input name="location" type="text" class="form-control input-style" id="dlastName" placeholder="Location" value="<?=$shippingInfo['date_created']?>">
+                                <span class="error-message" id="dlastname-error"></span>
+                            </div>
+                </div>
+                <div class="form-row">
                     <div class="form-group col-md-12">
                         <label for="inputEmail4" class="input__label">History Description</label>
                         <input name="description" type="text" class="form-control input-style" id="dfirstName" placeholder="Description" value="<?=$shippingInfo['description']?>">
                         <span class="error-message" id="dfirstname-error"></span>
                     </div>
-                </div>
                 <button id="update-details" type="submit" class="btn btn-primary btn-style mt-4"><?=$_GET['id'] && is_numeric($_GET['id']) ? 'Update' : 'Add'?></button>
                 </div>
             </form>

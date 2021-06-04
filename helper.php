@@ -33,7 +33,7 @@
             $j = 0;
             do {
                 $tmp .= mt_rand(1, 9);
-            } while(++$j < 9);
+            } while(++$j < 14);
                 
             return $tmp;
         }
